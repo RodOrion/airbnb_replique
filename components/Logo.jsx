@@ -1,8 +1,9 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 import logo from "../assets/img/airbnb.svg"
 
 const Logo = () => {
-  return <Image source={logo} resizeMode='contain' />;
+  return <Image style={{height:80, width:'100%', marginBottom:20}} source={logo} contentFit="contain" />;
 }
 
 export default Logo;

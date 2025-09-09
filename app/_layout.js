@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Layout = () => {
   return (
@@ -8,16 +9,19 @@ const Layout = () => {
         options={{
         //   headerShown: false,
           title: "Home",
-          //   tabBarIcon: () => (
-          //     // <FontAwesome6 name="house-chimney" size={24} color="red" />
-          //     <AntDesign name="downcircle" size={24} color="black" />
-          //   ),
+            tabBarIcon: () => (
+              <AntDesign name="home" size={24} color="black" />
+            ),
         }}
       />
       <Tabs.Screen 
         name="auth"
-        options={ {
-            title:"Connexion"
+        options={{
+            headerShown: false,
+            title:"Connexion",
+            tabBarIcon: () => {
+                <AntDesign name="enter" size={24} color="black" />
+            },
         }}
       />
     </Tabs>

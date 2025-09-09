@@ -1,19 +1,46 @@
-import { TextInput } from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { useState } from "react";
 
-const FormTextInput = ({placeholder, setState, state, secureTextEntry=false}) => {
+const FormTextInput = ({placeholder, setState, state, secureTextEntry=false, keyboardType="default", multiline=false, style}) => {
+  const [secureText, setSecureText] = useState(secureTextEntry)
+  const handleChangeSecure = (setState) => {
+    setState(prev => !prev)
+  }
 
   return (
-  <TextInput
-    style={{ height: 44, borderColor: "gray", borderWidth: 1, marginBottom: 10 }}
-        placeholder={placeholder}
-        onChangeText={text => {
-          setState(text);
+    <View style={{position:'relative'}}>
+      <TextInput
+        style={style}
+            placeholder={placeholder}
+            onChangeText={text => {
+              setState(text);
+            }}
+            value={state}
+            secureTextEntry = {secureText}
+            keyboardType={keyboardType}
+            multiline={multiline}
+      />
+      {secureTextEntry && 
+      <TouchableOpacity  
+        style={styles.eye}
+        onPress={() => {
+          handleChangeSecure(setSecureText)
         }}
-        value={state}
-        secureTextEntry = {secureTextEntry}
-        keyboardType="email-address"
-  />
+      >
+        <AntDesign name="eyeo" size={20} color="black" />
+      </TouchableOpacity >
+      }
+    </View>
     );
 }
+
+const styles = StyleSheet.create({
+  eye : {
+    position:'absolute',
+    right:0,
+    top:12,
+  }
+})
 
 export default FormTextInput;
