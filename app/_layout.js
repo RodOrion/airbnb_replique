@@ -1,16 +1,27 @@
 import { Tabs } from "expo-router";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const Layout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: '#fff', // Couleur de l'onglet actif
+        tabBarInactiveTintColor: '#ccc', // Couleur de l'onglet inactif
+        tabBarStyle: {
+          backgroundColor: '#222', // Couleur de fond du footer
+          borderTopColor: '#ccc', // Couleur de la bordure du haut
+          borderTopWidth: 3,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
         //   headerShown: false,
           title: "Home",
             tabBarIcon: () => (
-              <AntDesign name="home" size={24} color="black" />
+              <FontAwesome5 name="home" size={24} color="#eee" />
             ),
         }}
       />
@@ -19,10 +30,10 @@ const Layout = () => {
         options={{
             headerShown: false,
             title:"Connexion",
-            tabBarIcon: () => {
-                <AntDesign name="enter" size={24} color="black" />
-            },
-        }}
+            tabBarIcon: () => (
+              <FontAwesome name="sign-in" size={24} color="#eee" />
+            )
+          }}
       />
     </Tabs>
   );

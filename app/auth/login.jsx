@@ -6,6 +6,7 @@ import Logo from "../../components/Logo";
 import { useState } from "react";
 import { Link } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import TitleForm from "../../components/TitleForm";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -43,9 +44,17 @@ const Login = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-        <Logo />
+    <SafeAreaView style={[styles.safeArea, styles.container]}>
+      <KeyboardAwareScrollView 
+        contentContainerStyle={styles.scrollContainer}
+        enableOnAndroid={true}
+        keyboardOpeningTime={250}
+        showsVerticalScrollIndicator={false}
+      >
+        <View>
+          <Logo />
+          <TitleForm styleTitle={styles.title} titleForm="Connexion" />
+        </View>
         <View style={{gap:30}}>
           <FormTextInput 
             state={email} 
@@ -61,7 +70,6 @@ const Login = () => {
             secureTextEntry={true}
             style={styles.inputForm}
           />
-
         </View>
         <View style={{alignItems:'center'}}>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
@@ -88,12 +96,20 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Platform.OS === "android" ? Constants.statusBarHeight : 0,
   },
+  scrollContainer: {
+    flexGrow: 1, // Important !
+    justifyContent:'space-between',
+  },
   container: {
     flex:1,
     paddingHorizontal: 40,
     paddingVertical:20,
-    justifyContent:'space-between',
     backgroundColor: '#f5f5f5',
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 22,
+    marginBottom: 10,
   },
   button: {
     padding: 20,

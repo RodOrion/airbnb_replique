@@ -13,6 +13,8 @@ import Logo from "../../components/Logo";
 import { useState } from "react";
 import { Link } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import TitleForm from "../../components/TitleForm";
+import colors from "../../assets/colors.json"
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -68,8 +70,10 @@ const Signup = () => {
         keyboardOpeningTime={250}
         showsVerticalScrollIndicator={false}
       >
-        <Logo />
-        <Text style={styles.title}>Inscription</Text>
+        <View>
+          <Logo />
+          <TitleForm styleTitle={styles.title} titleForm="Inscription" />
+        </View>
         <View style={{ gap: 25 }}>
           <FormTextInput
             state={email}
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 20,
     borderRadius: 20,
-    borderColor: "red",
+    borderColor: colors.primary.coral,
     borderWidth: 1,
     borderStyle: "solid",
     alignItems: "center",
@@ -164,17 +168,17 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: "#ccc",
   },
-  buttonOpacity: {
-    width: "100%",
-    padding: 10,
-    backgroundColor: "blue",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
-    gap: 10,
-    marginTop: 10,
-  },
+  // buttonOpacity: {
+  //   width: "100%",
+  //   padding: 10,
+  //   backgroundColor: "blue",
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderRadius: 5,
+  //   gap: 10,
+  //   marginTop: 10,
+  // },
   errorText: {
     color: "red",
     textAlign: "center",
@@ -183,14 +187,14 @@ const styles = StyleSheet.create({
   },
   textArea: {
     textAlignVertical:'top',
-    borderColor: "red",
+    borderColor: colors.primary.coral,
     borderWidth: 1,
     borderStyle: "solid",
     minHeight: 80,
     marginTop: 10,
   },
   inputForm: {
-    borderBottomColor: "red",
+    borderBottomColor: colors.primary.coral,
     borderBottomWidth: 1,
     borderStyle: "solid",
   },

@@ -20,6 +20,7 @@ const FormTextInput = ({placeholder, setState, state, secureTextEntry=false, key
             secureTextEntry = {secureText}
             keyboardType={keyboardType}
             multiline={multiline}
+            autoCapitalize="none"
       />
       {secureTextEntry && 
       <TouchableOpacity  

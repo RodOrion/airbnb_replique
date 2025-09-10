@@ -1,0 +1,101 @@
+{
+  "primary": {
+    "coral": "#FF5A5F",
+    "coralDark": "#E04147",
+    "coralLight": "#FF7B7E",
+    "coralPale": "#FFE8E9"
+  },
+  "secondary": {
+    "teal": "#00A699",
+    "tealDark": "#008B80",
+    "tealLight": "#33B8AD",
+    "pink": "#FC642D",
+    "purple": "#767676",
+    "yellow": "#FFB400"
+  },
+  "neutral": {
+    "white": "#FFFFFF",
+    "offWhite": "#FAFAFA",
+    "lightGray": "#F7F7F7",
+    "gray": "#EBEBEB",
+    "mediumGray": "#DDDDDD",
+    "darkGray": "#767676",
+    "charcoal": "#484848",
+    "black": "#222222"
+  },
+  "text": {
+    "primary": "#222222",
+    "secondary": "#484848",
+    "tertiary": "#767676",
+    "light": "#B0B0B0",
+    "inverse": "#FFFFFF",
+    "link": "#008489",
+    "error": "#C13515",
+    "success": "#008A05"
+  },
+  "background": {
+    "primary": "#FFFFFF",
+    "secondary": "#F7F7F7",
+    "tertiary": "#FAFAFA",
+    "overlay": "rgba(34, 34, 34, 0.8)",
+    "modal": "rgba(0, 0, 0, 0.5)"
+  },
+  "border": {
+    "light": "#EBEBEB",
+    "medium": "#DDDDDD",
+    "dark": "#767676",
+    "focus": "#00A699"
+  },
+  "status": {
+    "success": "#008A05",
+    "successLight": "#D1F2D1",
+    "warning": "#FFB400",
+    "warningLight": "#FFF4CC",
+    "error": "#C13515",
+    "errorLight": "#FADBD8",
+    "info": "#00A699",
+    "infoLight": "#CCF2F0"
+  },
+  "rating": {
+    "star": "#FFB400",
+    "starEmpty": "#DDDDDD"
+  },
+  "price": {
+    "primary": "#222222",
+    "strikethrough": "#767676",
+    "discount": "#C13515"
+  },
+  "card": {
+    "background": "#FFFFFF",
+    "shadow": "rgba(0, 0, 0, 0.12)",
+    "border": "#EBEBEB"
+  },
+  "input": {
+    "background": "#FFFFFF",
+    "border": "#DDDDDD",
+    "borderFocus": "#00A699",
+    "borderError": "#C13515",
+    "placeholder": "#767676"
+  },
+  "button": {
+    "primary": "#FF5A5F",
+    "primaryPressed": "#E04147",
+    "primaryDisabled": "#FFB3B5",
+    "secondary": "#FFFFFF",
+    "secondaryBorder": "#222222",
+    "secondaryPressed": "#F7F7F7",
+    "ghost": "transparent",
+    "ghostPressed": "#F7F7F7"
+  },
+  "navigation": {
+    "active": "#FF5A5F",
+    "inactive": "#767676",
+    "background": "#FFFFFF",
+    "border": "#EBEBEB"
+  },
+  "map": {
+    "pin": "#FF5A5F",
+    "cluster": "#00A699",
+    "selected": "#222222"
+  }
+}
