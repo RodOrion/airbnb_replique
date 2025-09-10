@@ -7,13 +7,19 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
+/** safe area **/
 import Constants from "expo-constants";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+/** components **/
 import FormTextInput from "../../components/FormTextInput";
 import Logo from "../../components/Logo";
-import { useState } from "react";
+import TitleForm from "../../components/TitleForm";
+/** COntext **/
+import { useContext, useState } from "react";
+import { AuthContext } from "../_layout";
+/** router **/
 import { Link } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import TitleForm from "../../components/TitleForm";
 import colors from "../../assets/colors.json"
 
 const Signup = () => {
@@ -24,6 +30,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useContext(AuthContext);
+  const insets = useSafeAreaInsets();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +55,7 @@ const Signup = () => {
         }
       );
       console.log(response.data);
+      login(response.data.id, response.data.token, response.data.username);
       alert("vous êtes inscris");
       // navigation vers une autre page
     } catch (error) {
@@ -122,7 +131,7 @@ const Signup = () => {
               {isLoading ? "inscription..." : "S'inscrire'"}
             </Text>
           </TouchableOpacity>
-          <View>
+          <View style={{ paddingBottom: insets.bottom }}>
             <Text>
               Vous avez déjà un compte ?{" "}
               <Link href="auth/login">Connexion</Link>
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1, // Important !
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   container: {
     paddingHorizontal: 40,
@@ -168,17 +177,6 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: "#ccc",
   },
-  // buttonOpacity: {
-  //   width: "100%",
-  //   padding: 10,
-  //   backgroundColor: "blue",
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   borderRadius: 5,
-  //   gap: 10,
-  //   marginTop: 10,
-  // },
   errorText: {
     color: "red",
     textAlign: "center",

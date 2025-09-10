@@ -1,24 +1,35 @@
-import axios from "axios"
-import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, Platform } from "react-native";
+import axios from "axios";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Platform,
+} from "react-native";
+/** safe area **/
 import Constants from "expo-constants";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 /** COntext **/
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../_layout";
-
+/** components */
 import FormTextInput from "../../components/FormTextInput";
 import Logo from "../../components/Logo";
-import { useState } from "react";
-import { Link } from "expo-router";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TitleForm from "../../components/TitleForm";
-import colors from "../../assets/colors.json"
+/** router */
+import { Link } from "expo-router";
+
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import colors from "../../assets/colors.json";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const {login} = useContext(AuthContext)
+  const { login } = useContext(AuthContext);
+  const insets = useSafeAreaInsets();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,8 +47,8 @@ const Login = () => {
         }
       );
       console.log(response.data);
-      login(response.data.id, response.data.token, response.data.username)
-      alert('vous êtes connecté')
+      login(response.data.id, response.data.token, response.data.username);
+      alert("vous êtes connecté");
       // navigation vers une autre page
     } catch (error) {
       console.log(error);
@@ -52,7 +63,7 @@ const Login = () => {
 
   return (
     <SafeAreaView style={[styles.safeArea, styles.container]}>
-      <KeyboardAwareScrollView 
+      <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollContainer}
         enableOnAndroid={true}
         keyboardOpeningTime={250}
@@ -62,10 +73,10 @@ const Login = () => {
           <Logo />
           <TitleForm styleTitle={styles.title} titleForm="Connexion" />
         </View>
-        <View style={{gap:30}}>
-          <FormTextInput 
-            state={email} 
-            setState={setEmail} 
+        <View style={{ gap: 30 }}>
+          <FormTextInput
+            state={email}
+            setState={setEmail}
             placeholder="Email"
             keyboardType="email-address"
             style={styles.inputForm}
@@ -78,9 +89,9 @@ const Login = () => {
             style={styles.inputForm}
           />
         </View>
-        <View style={{alignItems:'center'}}>
+        <View style={{ alignItems: "center" }}>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={handleSubmit}
             style={[styles.button, isLoading && styles.buttonDisabled]}
             disabled={isLoading}
@@ -89,8 +100,11 @@ const Login = () => {
               {isLoading ? "Connexion..." : "Se connecter"}
             </Text>
           </TouchableOpacity>
-          <View>
-            <Text>Vous n'avez pas de compte ? <Link href="auth/signup">Inscription</Link></Text>
+          <View style={{ paddingBottom: insets.bottom }}>
+            <Text>
+              Vous n'avez pas de compte ?{" "}
+              <Link href="auth/signup">Inscription</Link>
+            </Text>
           </View>
         </View>
       </KeyboardAwareScrollView>
@@ -105,13 +119,13 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1, // Important !
-    justifyContent:'space-between',
+    justifyContent: "space-between",
   },
   container: {
-    flex:1,
+    flex: 1,
     paddingHorizontal: 40,
-    paddingVertical:20,
-    backgroundColor: '#f5f5f5',
+    paddingVertical: 20,
+    backgroundColor: "#f5f5f5",
   },
   title: {
     textAlign: "center",
@@ -121,26 +135,26 @@ const styles = StyleSheet.create({
   button: {
     padding: 20,
     borderRadius: 20,
-    borderColor:colors.primary.coral,
+    borderColor: colors.primary.coral,
     borderWidth: 1,
-    borderStyle:'solid',
-    alignItems: 'center',
+    borderStyle: "solid",
+    alignItems: "center",
     marginVertical: 10,
-    width:'80%',
+    width: "80%",
   },
   buttonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: "#ccc",
   },
   errorText: {
-    color: 'red',
-    textAlign: 'center',
+    color: "red",
+    textAlign: "center",
     marginBottom: 10,
     fontSize: 14,
   },
-  inputForm : {
-    borderBottomColor:colors.primary.coral,
-    borderBottomWidth:1,
-    borderStyle:'solid'
+  inputForm: {
+    borderBottomColor: colors.primary.coral,
+    borderBottomWidth: 1,
+    borderStyle: "solid",
   },
 });
 

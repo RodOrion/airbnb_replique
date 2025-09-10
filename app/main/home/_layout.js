@@ -4,7 +4,7 @@ const HomeLayout = () => {
     return (
     <Stack 
         screenOptions={{
-            headerShown: true,
+            headerShown: false,
             headerBackTitle: "Retour"
         }}
     >
@@ -12,14 +12,14 @@ const HomeLayout = () => {
         name="rooms" 
         options={{ 
           title: "Rooms",
-          headerShown: false
+          //headerShown: false
         }} 
       />
       <Stack.Screen 
         name="room" 
         options={{ 
-          title: "Room",
-          headerShown: false 
+          title: "Rooms",
+          headerShown: true 
         }} 
       />
     </Stack>)
