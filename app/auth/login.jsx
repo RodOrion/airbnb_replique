@@ -1,18 +1,24 @@
 import axios from "axios"
 import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, Platform } from "react-native";
 import Constants from "expo-constants";
+/** COntext **/
+import { useContext } from "react";
+import { AuthContext } from "../_layout";
+
 import FormTextInput from "../../components/FormTextInput";
 import Logo from "../../components/Logo";
 import { useState } from "react";
 import { Link } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TitleForm from "../../components/TitleForm";
+import colors from "../../assets/colors.json"
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const {login} = useContext(AuthContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +36,7 @@ const Login = () => {
         }
       );
       console.log(response.data);
+      login(response.data.id, response.data.token, response.data.username)
       alert('vous êtes connecté')
       // navigation vers une autre page
     } catch (error) {
@@ -114,7 +121,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 20,
     borderRadius: 20,
-    borderColor:'red',
+    borderColor:colors.primary.coral,
     borderWidth: 1,
     borderStyle:'solid',
     alignItems: 'center',
@@ -124,17 +131,6 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: '#ccc',
   },
-  buttonOpacity : {
-    width:'100%',
-    padding:10,
-    backgroundColor:'blue',
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:5,
-    gap:10,
-    marginTop:10
-  },
   errorText: {
     color: 'red',
     textAlign: 'center',
@@ -142,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   inputForm : {
-    borderBottomColor:'red',
+    borderBottomColor:colors.primary.coral,
     borderBottomWidth:1,
     borderStyle:'solid'
   },
