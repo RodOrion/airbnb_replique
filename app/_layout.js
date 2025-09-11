@@ -1,14 +1,38 @@
-import { Tabs, Stack, router } from "expo-router";
-import { createContext, useState } from "react";
-// import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-// import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Tabs, Stack, router, Slot } from "expo-router";
+import { createContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext()
 
 const Layout = () => {
-  const [userID, setUserID] = useState(null)
-  const [userToken, setUserToken] = useState(null)
+  const [userID, setUserID] = useState( null )
+  const [userToken, setUserToken] = useState( null )
   const [username, setUsername] = useState(null)
+  const [isInitialized, setIsInitialized] = useState(false)
+
+  // Récupérer les données du store au montage
+  useEffect( () => {
+    const getStoreData = async() => {  
+      try {
+        const userIDStore = await AsyncStorage.getItem("userID");
+        const userTokenStore = await AsyncStorage.getItem("userToken");
+        userIDStore && setUserID(userIDStore)
+        userTokenStore && setUserToken(userTokenStore)
+      } catch (error) {
+        console.log('erreur récupération store', error);
+      }
+      finally {
+        setIsInitialized(true)
+      }
+    }
+    getStoreData();
+  },[])
+
+  // Sauvegarder les données dans le store
+  const saveAsyncStorage = async(userID, userToken) => {
+    await AsyncStorage.setItem("userID", userID);
+    await AsyncStorage.setItem("userToken", userToken);
+  }
 
   const login = (user_id, user_token, user_name) => {
     setUserID(user_id)
@@ -21,17 +45,32 @@ const Layout = () => {
     setUserID(null)
     setUserToken(null)
     setUsername(null)
+    saveAsyncStorage("","")
     router.replace('auth/login')
   }
 
+  useEffect(() => {
+    if(isInitialized) {
+      if(userID && userToken) {
+        saveAsyncStorage(userID, userToken)
+        router.replace('main/profile')
+      } else {
+        router.replace('auth/login')
+      }
+    }
+  }, [userID, userToken])
+
+
+
   return (
-    <AuthContext.Provider value={{userID, setUserID, userToken, setUserToken, login, logout, setUsername, username}}>
-        <Stack 
+    <AuthContext.Provider value={{userID, userToken, login, logout, username}}>
+      <Slot />
+        {/* <Stack 
           screenOptions={{
                 headerShown: false,
                 headerBackTitle: "Retour"
           }}
-        />
+        /> */}
     </AuthContext.Provider>
     // <Tabs
     //   screenOptions={{

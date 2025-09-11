@@ -6,6 +6,7 @@ import {
   View,
   SafeAreaView,
   Platform,
+  ActivityIndicator
 } from "react-native";
 /** safe area **/
 import Constants from "expo-constants";
@@ -31,8 +32,7 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const insets = useSafeAreaInsets();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (!email || !password) {
       setError("veuillez remplir les champs");
       return;
@@ -97,7 +97,7 @@ const Login = () => {
             disabled={isLoading}
           >
             <Text style={styles.buttonText}>
-              {isLoading ? "Connexion..." : "Se connecter"}
+              {isLoading ? <ActivityIndicator /> : "Se connecter"}
             </Text>
           </TouchableOpacity>
           <View style={{ paddingBottom: insets.bottom }}>
